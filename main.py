@@ -12,10 +12,16 @@ class Pomodoro:
         self.phase = "Work"
         self.remaining = WORK
         self.running = False
+        self.start_time=dt.datetime.now().strftime("%H:%M")
 
         self.root.title("Pomodoro Timer")
+
+        self.start_label = tk.Label(root, text=f"Start Time: {self.start_time}", font=("Arial", 14))
+        self.start_label.pack(pady=10)
+
         self.label = tk.Label(root, text=self.format_time(self.remaining), font=("Arial", 36))
         self.label.pack(pady=20)
+
 
         self.start_btn = tk.Button(root, text="Start", command=self.start)
         self.start_btn.pack(side="left", expand=True)
@@ -50,6 +56,8 @@ class Pomodoro:
 
     def start(self):
         if not self.running:
+            self.start_time=time.strftime("%H:%M:%S")
+            self.start_label.config(text=self.start_time)
             self.running = True
             self.update()
 
